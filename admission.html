@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>青岛理工大学艺术与设计学院 - 招生信息</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Han Sans CN', 'Noto Sans SC', 'PingFang SC', sans-serif;
+            background: #f5f5f5;
+            color: #222;
+        }
+        .header {
+            background: linear-gradient(135deg, #222 0%, #111 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 40px;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+        .card h2 {
+            color: #222;
+            font-size: 24px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #222;
+        }
+        .card h3 {
+            color: #222;
+            font-size: 18px;
+            margin: 20px 0 10px;
+        }
+        .card p {
+            line-height: 1.8;
+            color: #222;
+        }
+        .card ul {
+            margin-left: 20px;
+            color: #222;
+        }
+        .card li {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+        .contact-info {
+            background: #e0e0e0;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .btn-back {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #222 0%, #111 100%);
+            color: white;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .btn-back:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(34, 34, 34, 0.3);
+        }
+        .footer {
+            background: #222;
+            color: #aaa;
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px;
+        }
+        .art-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <canvas class="art-canvas"></canvas>
+    <div class="header">
+        <h1>招生信息</h1>
+        <p>青岛理工大学艺术与设计学院欢迎您</p>
+    </div>
+    
+    <div class="container">
+        <div class="card">
+            <h2>本科招生</h2>
+            <h3>招生专业</h3>
+            <ul>
+                <li>环境设计（国家级一流专业建设点）</li>
+                <li>视觉传达设计</li>
+                <li>产品设计</li>
+                <li>服装与服饰设计</li>
+            </ul>
+            <h3>招生对象</h3>
+            <p>全国各省、自治区、直辖市的艺术类考生，需参加各省组织的美术类专业统考并取得合格成绩，同时需参加全国普通高等学校统一招生考试。</p>
+            <h3>录取原则</h3>
+            <p>按照综合分（专业成绩×70% + 文化成绩×30%）从高到低择优录取，具体以当年招生章程为准。</p>
+        </div>
+        
+        <div class="card">
+            <h2>研究生招生</h2>
+            <h3>招生方向</h3>
+            <ul>
+                <li>设计学（学术型硕士）</li>
+                <li>艺术设计（专业型硕士）</li>
+                <li>风景园林（专业型硕士）</li>
+            </ul>
+            <h3>报考条件</h3>
+            <p>具有国家承认的大学本科毕业学历的人员；或国家承认学历的应届本科毕业生；或同等学力考生（需符合相关要求）。</p>
+        </div>
+        
+        <div class="card">
+            <h2>联系方式</h2>
+            <div class="contact-info">
+                <p><strong>招生办公室：</strong>0532-85071039</p>
+                <p><strong>学院办公室：</strong>0532-85071580</p>
+                <p><strong>电子邮箱：</strong>art@qut.edu.cn</p>
+                <p><strong>通讯地址：</strong>山东省青岛市市南区宁夏路308号青岛理工大学艺术与设计学院</p>
+            </div>
+        </div>
+        
+        <a href="index.html" class="btn-back">返回首页</a>
+    </div>
+    
+    <div class="footer">
+        <p>青岛理工大学艺术与设计学院 版权所有</p>
+    </div>
+    <script>
+        const artCanvas = document.querySelector('.art-canvas');
+        const ctx = artCanvas.getContext('2d');
+        function resizeCanvas() {
+            artCanvas.width = window.innerWidth;
+            artCanvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        let stars = [];
+        const maxStars = 20;
+        document.addEventListener('mousemove', function(e) {
+            stars.push({
+                x: e.clientX,
+                y: e.clientY,
+                size: 8 + Math.random() * 12,
+                rotation: Math.random() * 360,
+                alpha: 1
+            });
+            if (stars.length > maxStars) {
+                stars.shift();
+            }
+        });
+        function drawStar(ctx, x, y, size, rotation) {
+            ctx.beginPath();
+            for (let i = 0; i < 5; i++) {
+                const angle1 = (i * 4 * Math.PI) / 5 - Math.PI / 2 + (rotation * Math.PI) / 180;
+                const angle2 = angle1 + Math.PI / 5;
+                const x1 = x + Math.cos(angle1) * size;
+                const y1 = y + Math.sin(angle1) * size;
+                const x2 = x + Math.cos(angle2) * size * 0.4;
+                const y2 = y + Math.sin(angle2) * size * 0.4;
+                if (i === 0) {
+                    ctx.moveTo(x1, y1);
+                } else {
+                    ctx.lineTo(x1, y1);
+                }
+                ctx.lineTo(x2, y2);
+            }
+            ctx.closePath();
+        }
+        function drawStars() {
+            ctx.clearRect(0, 0, artCanvas.width, artCanvas.height);
+            stars.forEach((star, index) => {
+                const fadeFactor = stars.length > 1 ? (index + 1) / stars.length : 1;
+                const alpha = star.alpha * fadeFactor;
+                const size = star.size * fadeFactor;
+                if (alpha <= 0.05) return;
+                ctx.save();
+                ctx.globalAlpha = alpha;
+                ctx.fillStyle = '#FFD93D';
+                ctx.strokeStyle = '#FFC125';
+                ctx.lineWidth = 1;
+                drawStar(ctx, star.x, star.y, size, star.rotation);
+                ctx.fill();
+                ctx.stroke();
+                ctx.restore();
+            });
+            stars = stars.map(star => ({
+                ...star,
+                alpha: star.alpha - 0.025
+            })).filter(star => star.alpha > 0);
+            requestAnimationFrame(drawStars);
+        }
+        drawStars();
+    </script>
+</body>
+</html>
